@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     final colorScheme = ColorScheme.fromSeed(seedColor: Colors.green);
 
     return MaterialApp(
-      title: 'Animals App',
+      title: 'Pokemon App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

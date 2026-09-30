@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
+import '../root.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,8 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  static const String _validUsername = 'Ibnu.Jabari';
-  static const String _validPassword = 'AkuRaja';
+  static const String _nim = '124240009';
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,13 +23,13 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _showError(String message) {
+  void _showMessage(String message, Color color) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
           content: Text(message),
-          backgroundColor: Colors.red,
+          backgroundColor: color,
         ),
       );
   }
@@ -40,20 +39,21 @@ class _LoginPageState extends State<LoginPage> {
     final password = _passwordController.text.trim();
 
     if (username.isEmpty || password.isEmpty) {
-      _showError('Username dan password tidak boleh kosong.');
+      _showMessage(
+        'Login gagal! Username dan password tidak boleh kosong.',
+        Colors.red,
+      );
       return;
     }
 
-    final isValid = username == _validUsername &&
-        password == _validPassword;
-
-    if (isValid) {
+    if (password == _nim) {
+      _showMessage('Login berhasil! Selamat datang, $username.', Colors.green);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomePage()),
+        MaterialPageRoute(builder: (_) => Root(username: username)),
       );
     } else {
-      _showError('Username atau password salah.');
+      _showMessage('Login gagal! Username atau password salah.', Colors.red);
     }
   }
 

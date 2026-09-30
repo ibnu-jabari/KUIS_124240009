@@ -25,11 +25,12 @@ class _RootState extends State<Root> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 34, 161, 63),
         foregroundColor: Colors.white,
-        title: Text("Halo, ${widget.username}"),
+        centerTitle: true,
+        title: const Text('Pokemon App'),
       ),
-
-      body:
-          pages[_selectedIndex], // Menampilkan halaman sesuai tab yang dipilih
+      // IndexedStack menjaga state tiap halaman, jadi gambar profil yang
+      // sudah dipilih tidak kereset saat pindah tab Home <-> Profile.
+      body: IndexedStack(index: _selectedIndex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.teal, // Warna tab yang sedang aktif
@@ -39,8 +40,8 @@ class _RootState extends State<Root> {
           });
         },
         items: const [
-          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
         ],
       ),
     );
